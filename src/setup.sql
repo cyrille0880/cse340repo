@@ -54,3 +54,47 @@ VALUES
 (3, 'Holiday Meal Packing & Delivery', 'Preparing and packaging holiday food boxes for homebound community members.', 'UnityServe Headquarters', '2026-12-23'),
 (3, 'Neighborhood River Cleanup', 'Removing plastic waste and debris along the riverbanks to protect local wildlife habitats.', 'Riverside Park Trailhead', '2027-01-14'),
 (3, 'After-School Homework Tutoring Hub', 'Volunteering to assist elementary school students with math and reading assignments.', 'Westside Community Club', '2027-01-28');
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE service_project_category (
+    project_id INT NOT NULL REFERENCES service_project(project_id) ON DELETE CASCADE,
+    category_id INT NOT NULL REFERENCES category(category_id) ON DELETE CASCADE,
+    PRIMARY KEY (project_id, category_id)
+);
+
+INSERT INTO category (name)
+VALUES 
+('Environmental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness');
+
+
+INSERT INTO service_project_category (project_id, category_id)
+VALUES
+-- BrightFuture Builders (1-5)
+(1, 1), (1, 3), -- Community Park Pavilion Build
+(2, 1), (2, 3), -- Solar Streetlight Installation
+(3, 3), (3, 4), -- Accessible Playground Ramp
+(4, 1), (4, 3), -- Community Garden Toolshed
+(5, 2), (5, 3), -- Youth Carpentry Bench Workshop
+
+-- GreenHarvest Growers (6-10)
+(6, 1), (6, 4), -- Southside Urban Garden Prep
+(7, 1), (7, 2), -- School Hydroponics Workshop
+(8, 1), (8, 2), -- Compost Management Seminar
+(9, 1), (9, 4), -- Orchard Tree Pruning & Care
+(10, 1), (10, 3), -- Seed Saving & Exchange Fair
+
+-- UnityServe Volunteers (11-15)
+(11, 3), (11, 4), -- Winter Coat & Food Drive
+(12, 2), (12, 3), -- Senior Center Tech Literacy Day
+(13, 3), (13, 4), -- Holiday Meal Packing & Delivery
+(14, 1), (14, 3), -- Neighborhood River Cleanup
+(15, 2), (15, 3); -- After-School Homework Tutoring Hub
+

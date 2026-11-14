@@ -5,6 +5,7 @@ import { testConnection } from './src/models/db.js';
 
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllprojects } from './src/models/service_project.js';
+import { getAllcategories } from './src/models/categories.js';
 const NODE_ENV = 'production';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +47,8 @@ app.get('/projects', async (req, res) => {
 
 app.get('/categories', async (req, res) => {
     const title = 'Service project Categories';
-    res.render('categories', { title });
+    const categories = await getAllcategories();
+    res.render('categories', { title, categories });
 });
 
 app.listen(PORT, async () => {

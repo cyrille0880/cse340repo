@@ -3,10 +3,16 @@
 <main>
     <h1><%= title %></h1>
     <ul>
-        <li> environmental</li>
-        <li> educational</li>
-        <li>community service</li>
-        <li>health and wellness</li>
+        <% categories.forEach(category => { %>
+    <li>
+        <strong><%= category.name %></strong>
+        <ul>
+            <% category.project_titles.forEach(title => { %>
+                <li><%= title %></li>
+            <% }); %>
+        </ul>
+    </li>
+<% }); %>
     </ul>
    
 </main>
